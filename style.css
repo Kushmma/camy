@@ -1,0 +1,55 @@
+.scrollbar-gutter {
+    scrollbar-gutter: stable;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 20px;
+}
+
+.filter-control {
+    margin: 10px;
+    padding: 5px;
+}
+
+.preset-button {
+    border: none;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.historgram {
+    height: 100px;
+    background-color: #f0f0f0;
+}
+
+.history-strip {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+:root {
+    --background-color-light: #ffffff;
+    --text-color-light: #000000;
+    --background-color-dark: #1a1a1a;
+    --text-color-dark: #ffffff;
+}
+
+body.light-mode {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+}
+
+body.dark-mode {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+}
+
+@media (max-width: 600px) {
+    .grid-layout {
+        grid-template-columns: 1fr;
+    }
+}
