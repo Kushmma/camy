@@ -2,17 +2,109 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Camy - Professional browser-based photo editor with advanced filters, real-time effects, and intuitive controls">
+  <meta name="theme-color" content="#6b8cff">
+  <title>Camy | Professional Photo Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <title>Camy Pro Photo Editor</title>
 </head>
 <body>
-  <div id="editor">
-    <h1>Welcome to Camy Pro Photo Editor</h1>
-    <input type="file" id="upload" />
-    <canvas id="canvas"></canvas>
-    <button id="save">Save</button>
-  </div>
-  <script src="script.js"></script>
+<div class="app" id="app" data-theme="dark">
+  <header class="app-header">
+    <div class="logo-area">
+      <h1>Camy</h1>
+      <span class="version-badge">Pro v2.0</span>
+    </div>
+    <div class="top-controls">
+      <label class="theme-switch">
+        <input type="checkbox" id="themeToggle" aria-label="Theme toggle">
+        <span class="toggle-track"></span>
+        <span style="font-size: 0.8rem;">Light/Dark</span>
+      </label>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel left-column">
+      <div class="upload-panel">
+        <div id="dropArea" class="drop-area">
+          <div class="upload-icon">📸✨</div>
+          <p style="margin-bottom: 8px;"><strong>Drop your image here</strong></p>
+          <p style="font-size: 0.8rem; opacity: 0.7;">or click to browse</p>
+          <input type="file" id="fileInput" accept="image/*" hidden />
+        </div>
+        <div id="imageMeta" class="image-meta"></div>
+      </div>
+
+      <div class="editor-panel">
+        <div class="image-stage">
+          <div id="compareStage" class="compare-stage">
+            <img id="beforeImage" alt="Original" class="compare-image" />
+            <div id="afterWrapper" class="after-wrapper">
+              <img id="afterImage" alt="Edited" class="compare-image" />
+            </div>
+            <div id="compareHandle" class="compare-handle">
+              <div class="handle-circle">◀▶</div>
+            </div>
+          </div>
+          <div class="vignette-layer" id="vignetteLayer"></div>
+        </div>
+        <input id="compareSlider" type="range" min="0" max="100" value="100" class="compare-slider" style="margin-top: 12px;" />
+      </div>
+    </section>
+
+    <section class="panel controls-panel">
+      <div class="card">
+        <h2>🎨 Smart Filters</h2>
+        <div class="slider-grid" id="filterControls"></div>
+      </div>
+
+      <div class="card">
+        <h2>⚡ One‑Click Presets</h2>
+        <div class="preset-buttons" id="presetButtons">
+          <button data-preset="original">Original</button>
+          <button data-preset="vintage">Vintage</button>
+          <button data-preset="arctic">Arctic</button>
+          <button data-preset="dramatic">Dramatic</button>
+          <button data-preset="candy">Candy Pop</button>
+          <button data-preset="matte">Matte Film</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🔄 Transform</h2>
+        <div class="transform-grid">
+          <button id="rotateLeft">⟳ Rotate Left</button>
+          <button id="rotateRight">⟳ Rotate Right</button>
+          <button id="flipH">⇄ Flip Horiz.</button>
+          <button id="flipV">⇅ Flip Vert.</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>📊 RGB Histogram</h2>
+        <canvas id="histogramCanvas" width="400" height="110" style="width:100%; height:auto;"></canvas>
+      </div>
+
+      <div class="card">
+        <h2>📜 Edit Timeline</h2>
+        <div id="historyStrip" class="history-strip"></div>
+      </div>
+
+      <div class="card actions">
+        <button id="copyCss">📋 Copy CSS Filter</button>
+        <button id="exportBtn">💾 Export PNG (Ctrl+S)</button>
+        <button id="resetBtn">🔄 Full Reset (R)</button>
+      </div>
+    </section>
+  </main>
+  <canvas id="exportCanvas" class="hidden"></canvas>
+  <div id="toast" class="toast"></div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
